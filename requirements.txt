@@ -1,4 +1,4 @@
-pyairtable
+airtable-python-wrapper
 twilio
 python-dotenv
 requests
