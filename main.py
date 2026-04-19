@@ -1,4 +1,5 @@
 import os
+print("--- AI Agent Script is now Running ---")
 from twilio.rest import Client
 from airtable import Airtable
 from dotenv import load_dotenv
@@ -73,12 +74,15 @@ def transfer_to_manager(call_sid, manager_number):
 # Main Logic: Fetching and Processing Airtable Records
 try:
     records = airtable.get_all(view='Grid view')
+    print(f"Total records found: {len(records)}")
     for record in records:
         fields = record.get('fields', {})
-        
+        current_status = fields.get('Status')
+        print(f"Checking record... Status is: {current_status}")
+    
         # Only process if status is 'Pending'
         if fields.get('Status') == 'Pending':
-            debtor_phone = fields.get('Phone')
+            debtor_phone = fields.get('Phone_number')
             manager_phone = fields.get('MANAGER_NUMBER') # Make sure this matches Airtable column name exactly
             
             if debtor_phone and manager_phone:
