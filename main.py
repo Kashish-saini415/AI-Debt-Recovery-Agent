@@ -46,6 +46,7 @@ def start_multilingual_ai_call(debtor_number, manager_number):
             from_=TWILIO_NUMBER
         )
         print(f"Successfully started Multilingual AI call to: {debtor_number}")
+        airtable.update(record['id'], {'Status': 'Called'})
         return call.sid
     except Exception as e:
         print(f"Failed to initiate call to {debtor_number}: {e}")
